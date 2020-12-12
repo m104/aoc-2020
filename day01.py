@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #
-# ./day1.py < day1.input.tx
+# ./day01.py < day01.input.tx
 #
 
 import sys
