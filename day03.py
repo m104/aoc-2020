@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 #
-# ./day03.py < day03.input.tx
-#
+# Debug:
+#   ./day03.py < day03.input.txt
+# Run:
+#   ./day03.py < day03.input.txt 2>/dev/null
+
 
 import sys
 from functools import reduce
@@ -25,8 +28,8 @@ def run_tobbogan(forest, slope):
             encounters += 1
         else:
             verdict = "O"
-        print(trees)
-        print((" " * column) + verdict)
+        print(trees, file=sys.stderr)
+        print((" " * column) + verdict, file=sys.stderr)
         column = (column + slope[0]) % grid_width
         row += slope[1]
 
@@ -44,6 +47,6 @@ slopes = [
     (1, 2),
 ]
 encounters = [run_tobbogan(forest, slope) for slope in slopes]
-print(f"encouters={encounters}")
+print(f"encouters={encounters}", file=sys.stderr)
 answer = reduce(lambda e1, e2: e1 * e2, encounters)
 print(f"Part II Answer: {answer}")

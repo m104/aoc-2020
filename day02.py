@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 #
-# ./day02.py < day02.input.tx
-#
+# Debug:
+#   ./day02.py < day02.input.txt
+# Run:
+#   ./day02.py < day02.input.txt 2>/dev/null
+
 
 import sys
 
@@ -22,7 +25,8 @@ def validate_first_policy(password, letter, policy):
     count = len(list(filter(lambda c: c == letter, password)))
     verdict = count in policy
     print(
-        f"verdict={verdict} letter={letter} count={count} policy={policy} password={password}"
+        f"verdict={verdict} letter={letter} count={count} policy={policy} password={password}",
+        file=sys.stderr,
     )
     return verdict
 
@@ -49,7 +53,8 @@ def validate_second_policy(password, letter, indexes):
     count = len(list(valid))
     verdict = count == 1
     print(
-        f"verdict={verdict} letter={letter} count={count} indexes={indexes} password={password}"
+        f"verdict={verdict} letter={letter} count={count} indexes={indexes} password={password}",
+        file=sys.stderr,
     )
     return verdict
 

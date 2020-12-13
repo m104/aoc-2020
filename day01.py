@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 #
-# ./day01.py < day01.input.tx
-#
+# Debug:
+#   ./day01.py < day01.input.txt
+# Run:
+#   ./day01.py < day01.input.txt 2>/dev/null
+
 
 import sys
 from functools import reduce
@@ -14,7 +17,7 @@ for line in sys.stdin:
     numbers.append(int(line.strip()))
 
 numbers = sorted(numbers)
-print(numbers)
+print(numbers, file=sys.stderr)
 
 iterations = 0
 
@@ -28,7 +31,8 @@ def bsearch(target, collection, left, right):
     test = ceil((right - left) / 2) + left
     value = collection[test]
     print(
-        f"bsearch: target={target} left={left} test={test} right={right} value={value}"
+        f"bsearch: target={target} left={left} test={test} right={right} value={value}",
+        file=sys.stderr,
     )
     if value == target:
         return test
@@ -44,7 +48,8 @@ def find_pair_positions(target, collection, left, right):
     value = collection[test]
     total = base + value
     print(
-        f"find_pair_positions: target={target} left={left} test={test} right={right} diff={total - target}"
+        f"find_pair_positions: target={target} left={left} test={test} right={right} diff={total - target}",
+        file=sys.stderr,
     )
     if total == target:
         return (left, test)
@@ -54,8 +59,8 @@ def find_pair_positions(target, collection, left, right):
 
 positions = find_pair_positions(2020, numbers, 0, len(numbers) - 1)
 pair = (numbers[positions[0]], numbers[positions[1]])
-print(f"iterations={iterations} pair={pair}")
-print(f"** Part I answer: {pair[0] * pair[1]}")
+print(f"iterations={iterations} pair={pair}", file=sys.stderr)
+print(f"Part I answer: {pair[0] * pair[1]}")
 
 iterations = 0
 
@@ -76,5 +81,5 @@ def find_triplet_positions(target, collection):
 positions = find_triplet_positions(2020, numbers)
 values = list(map(lambda i: numbers[i], positions))
 product = reduce(lambda x, y: x * y, values)
-print(f"iterations={iterations} values={values}")
-print(f"** Part II answer: {product}")
+print(f"iterations={iterations} values={values}", file=sys.stderr)
+print(f"Part II answer: {product}")

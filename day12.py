@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 #
-# ./day12.py < day12.input.tx
+# Debug:
+#   ./day12.py < day12.input.txt
+# Run:
+#   ./day12.py < day12.input.txt 2>/dev/null
 
 import sys
 
@@ -39,16 +42,16 @@ def vec_rotate(vec, direction):
 
 
 def apply_action(position, pointing, action, value):
-    print(f"position={position} pointing={pointing}")
-    print(f"action={action} value={value}")
+    print(f"position={position} pointing={pointing}", file=sys.stderr)
+    print(f"action={action} value={value}", file=sys.stderr)
     if action in {"L", "R"}:
         # Rightward
         increment = 1
         if action == "L":
             increment = -1
         steps = int(value / 90)
-        print(f"  increment={increment} steps={steps}")
-        pointing = ((pointing + (increment * steps)) % len(cardinals))
+        print(f"  increment={increment} steps={steps}", file=sys.stderr)
+        pointing = (pointing + (increment * steps)) % len(cardinals)
         return (position, pointing)
     elif action in {"E", "S", "W", "N"}:
         cardinal = cardinals_by_action.get(action)
@@ -70,7 +73,7 @@ for instruction in instructions:
     action, value = parse_instruction(instruction)
     position, pointing = apply_action(position, pointing, action, value)
 
-print(f"PART I: Final position: {position}")
+print(f"PART I: Final position: {position}", file=sys.stderr)
 distance = abs(position[0]) + abs(position[1])
 print(f"PART I: Manhattan distance: {distance}")
 
@@ -80,8 +83,8 @@ position = (0, 0)
 
 for instruction in instructions:
     action, value = parse_instruction(instruction)
-    print(f"position={position} waypoint={waypoint}")
-    print(f"action={action} value={value}")
+    print(f"position={position} waypoint={waypoint}", file=sys.stderr)
+    print(f"action={action} value={value}", file=sys.stderr)
     if action == "F":
         movement = vec_scale(waypoint, value)
         position = vec_sum(position, movement)
@@ -92,6 +95,6 @@ for instruction in instructions:
     else:
         waypoint, _ = apply_action(waypoint, 0, action, value)
 
-print(f"PART II: Final position: {position}")
+print(f"PART II: Final position: {position}", file=sys.stderr)
 distance = abs(position[0]) + abs(position[1])
 print(f"PART II: Manhattan distance: {distance}")
