@@ -34,7 +34,7 @@ def print_schedule(when, active_lines, window=30):
             if (time % line) == 0:
                 schedule += "    D"
             else:
-                schedule += "    "
+                schedule += "    ."
 
         print(f"{delim} {schedule}   {time}", file=sys.stderr)
 
